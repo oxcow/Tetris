@@ -1,0 +1,71 @@
+@CHARSET "UTF-8";
+
+body {
+	margin-left: 60px;
+	margin-top: 20px;
+}
+
+#TetrisGame {
+	width: 434px;
+	height: 442px;
+	border: 1px solid red;
+}
+
+#canvas {
+	float: left;
+	width: 230px;
+	height: 440px;
+	border: 1px solid green;
+}
+
+#canvas span {
+	float: left;
+	padding-left: 1px;
+	width: 20px;
+	height: 20px;
+	border: 1px solid #eee;
+	font-size: 12px;
+}
+
+#preCanvas {
+	float: left;
+	padding-top: 15px;
+	width: 200px;
+	height: 80px;
+	border-bottom: 1px;
+}
+
+#preCanvas span {
+	float: left;
+	width: 20px;
+	height: 20px;
+	font-size: 12px;
+}
+
+#control {
+	float: left;
+	padding-top: 15px;
+	width: 200px;
+	height: 321px;
+}
+
+#control label {
+	padding-left: 20px;
+	border: 0px solid #A2C11E;
+	font-family: cursive;
+}
+
+#score #level {
+	background: red;
+}
+
+#control button {
+	margin: 15px 0px 13px 10px;
+	width: 80px;
+}
+
+#debug {
+	float: left;
+	width: 433px;
+	font-size: 11px;
+}
