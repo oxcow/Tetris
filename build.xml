@@ -4,7 +4,7 @@
 	<property name="build.dir" value="./build" />
 	<property name="src.dir" value="./src" />
 
-	<property name="version" value="0.1" />
+	<property name="version" value="1.0" />
 
 	<property name="js.name" value="Tetris-${version}.js" />
 	<property name="js.min.name" value="Tetris-${version}.min.js" />
