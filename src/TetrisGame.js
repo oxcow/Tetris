@@ -20,7 +20,7 @@ class TetrisGame {
         this.canvas = new Canvas(20, 10, 'canvas');// 创建canvas对象
         this.preCanvas = new PreCanvas(10, 4, 'preCanvas');
         this.tetris = null;// 方块
-        this.preTetris = Tetris.Factory();
+        this.preTetris = Tetris.NewInstance();
         this.body = [];// 记录游戏中已经被占的格子
     }
 
@@ -43,7 +43,7 @@ class TetrisGame {
      */
     newTetris() {
         this.tetris = this.preTetris;
-        this.preTetris = Tetris.Factory();
+        this.preTetris = Tetris.NewInstance();
         this.preCanvas.show(this.preTetris.body);
     }
 
@@ -103,10 +103,11 @@ class TetrisGame {
         // 是否碰到已经被占的格子
         for (let i = 0; i < 4; i++) {
             // 游戏结束
-            if ((this.tetris.body[0] < 0 || Math.floor((this.tetris.body[i]) / 10) === 1)
-                && this.body.includes(this.tetris.body[i] + 10)) {
+            if ((this.tetris.body[0] < 0 || Math.floor((this.tetris.body[i]) / 10) === 1) && this.body.includes(this.tetris.body[i] + 10)) {
                 alert("GAME OVER");
-                location.reload();
+                this.reset();
+                this.stop();
+                return true;
             }
             // 方块的组成中只要一个放块的下一个位置属于已经被占的就表明该方块不可以在往下移动了
             if (this.body.includes(this.tetris.body[i] + 10)) {
@@ -154,9 +155,9 @@ class TetrisGame {
     /**
      *  显示得分及等级
      */
-    displayScoreAndLevel() {
-        document.getElementById('score').innerHTML = this.score;
-        document.getElementById('level').innerHTML = this.level;
+    displayScoreAndLevel(score = this.score, level = this.level) {
+        document.getElementById('score').innerHTML = score;
+        document.getElementById('level').innerHTML = level;
     }
 
     /**
@@ -169,8 +170,7 @@ class TetrisGame {
         for (let i = 0; i < 4; i++) {
             // 判断是否已经到达最左边
             if (sDirc === "left") {
-                if (this.tetris.body[i] % 10 === 1
-                    && (this.tetris.body[i] - 1) % 10 === 0) {
+                if (this.tetris.body[i] % 10 === 1 && (this.tetris.body[i] - 1) % 10 === 0) {
                     return true;
                 }
                 if (this.body.includes(this.tetris.body[i] - 1)) {
@@ -178,8 +178,7 @@ class TetrisGame {
                 }
             } else if (sDirc === "right") {
                 // 判断是否已经到达最右边
-                if (this.tetris.body[i] % 10 === 0
-                    && (this.tetris.body[i] + 1) % 10 === 1) {
+                if (this.tetris.body[i] % 10 === 0 && (this.tetris.body[i] + 1) % 10 === 1) {
                     return true;
                 }
                 if (this.body.includes(this.tetris.body[i] + 1)) {
@@ -246,11 +245,25 @@ class TetrisGame {
         clearTimeout(this.timeOut);
     }
 
-    // 重新开始
-    static restart() {
-        location.reload();
-    }
+    /**
+     * 重置游戏
+     */
+    reset() {
+        this.tetris.eraser();
+        this.body.forEach(ele => {
+            let _oE = document.getElementById(ele);
+            if (_oE) {
+                _oE.style.background = document.getElementById("canvas").style.background;
+            }
+        });
 
+        this.displayScoreAndLevel(0, 0);
+        this.speed = 1000;// 降落速度
+        this.body = [];
+        this.tetris = null;
+         
+        //this.stop();
+    }
 }
 
 window.onload = function () {
@@ -266,6 +279,6 @@ window.onload = function () {
         oTetrisGame.stop();
     };
     document.getElementById("restart").onclick = function () {
-        TetrisGame.restart();
+        oTetrisGame.reset();
     };
 };

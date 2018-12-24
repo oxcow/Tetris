@@ -58,10 +58,10 @@ class Utils {
      */
     static ElementGroupByN(aObj, iN) {
         let __aZeroArray = Utils.CreateTwoDimensionArray(20, []);
-        for (let i = 0; i < aObj.length; i++) {
-            let __quotient = Math.floor((aObj[i] - 1) / iN);// 取商(被10除,商相同的元素为一组)
-            let __remainder = (aObj[i] - 1) % iN;// 取余
-            __aZeroArray[__quotient][__remainder] = aObj[i];// 商相同的放在相同维度的余数位置
+        for (let ele of aObj) {
+            let __quotient = Math.floor((ele - 1) / iN);// 取商(被10除,商相同的元素为一组)
+            let __remainder = (ele - 1) % iN;// 取余
+            __aZeroArray[__quotient][__remainder] = ele;// 商相同的放在相同维度的余数位置
         }
         return __aZeroArray;
     }

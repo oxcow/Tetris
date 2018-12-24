@@ -27,7 +27,7 @@ class Canvas {
         }
         let oFragment = document.createDocumentFragment();// 创建文档碎片
         for (let i = 1; i <= this.row * this.column; i++) {
-            let oSpan = Utils.CreateElement('span', i, i);
+            let oSpan = Utils.CreateElement('span', i, null);
             oFragment.appendChild(oSpan);
         }
         oDiv_canvas.appendChild(oFragment);
@@ -74,8 +74,8 @@ class PreCanvas {
                 __oE.style.background = document.getElementById(this.offset).style.background;
             }
         }
-        for (let i = 0; i < oArray.length; i++) {
-            let __oE = document.getElementById(`pre_${oArray[i]}`);
+        for (let i of oArray) {
+            let __oE = document.getElementById(`pre_${i}`);
             if (__oE) {
                 __oE.style.background = 'blue';
             }
