@@ -32,7 +32,6 @@ class Canvas {
         }
         oDiv_canvas.appendChild(oFragment);
     }
-
 }
 
 /**

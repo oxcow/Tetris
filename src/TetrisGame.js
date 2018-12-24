@@ -7,7 +7,6 @@
  * @data 2010-4
  */
 
-
 /**
  * 俄罗斯方块游戏类
  */
@@ -169,14 +168,14 @@ class TetrisGame {
     leftOrRightMove(sDirc) {
         for (let i = 0; i < 4; i++) {
             // 判断是否已经到达最左边
-            if (sDirc === "left") {
+            if (sDirc === 'left') {
                 if (this.tetris.body[i] % 10 === 1 && (this.tetris.body[i] - 1) % 10 === 0) {
                     return true;
                 }
                 if (this.body.includes(this.tetris.body[i] - 1)) {
                     return true;
                 }
-            } else if (sDirc === "right") {
+            } else if (sDirc === 'right') {
                 // 判断是否已经到达最右边
                 if (this.tetris.body[i] % 10 === 0 && (this.tetris.body[i] + 1) % 10 === 1) {
                     return true;
@@ -199,11 +198,11 @@ class TetrisGame {
             direct = oEvent.which;
         }
         if (direct === 37) {// 37-->left
-            if (!this.leftOrRightMove("left"))
+            if (!this.leftOrRightMove('left'))
                 this.tetris.move(-1);
         }
         if (direct === 39) {// 39-->right
-            if (!this.leftOrRightMove("right"))
+            if (!this.leftOrRightMove('right'))
                 this.tetris.move(+1);
         }
         if (direct === 38) {// 38-->up
@@ -253,7 +252,7 @@ class TetrisGame {
         this.body.forEach(ele => {
             let _oE = document.getElementById(ele);
             if (_oE) {
-                _oE.style.background = document.getElementById("canvas").style.background;
+                _oE.style.background = document.getElementById('canvas').style.background;
             }
         });
 
@@ -272,13 +271,13 @@ window.onload = function () {
     document.onkeydown = function (oEvent) {
         oTetrisGame.keyboardEventsListeners(oEvent);
     };
-    document.getElementById("start").onclick = function () {
+    document.getElementById('start').onclick = function () {
         oTetrisGame.start();
     };
-    document.getElementById("stop").onclick = function () {
+    document.getElementById('stop').onclick = function () {
         oTetrisGame.stop();
     };
-    document.getElementById("restart").onclick = function () {
+    document.getElementById('restart').onclick = function () {
         oTetrisGame.reset();
     };
-};
+}

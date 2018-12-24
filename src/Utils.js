@@ -5,8 +5,6 @@
  * @email seadlead@gmail.com
  * @data 2010-4
  */
-
-
 class Utils {
     /**
      * 创建DOM元素
@@ -39,6 +37,7 @@ class Utils {
      */
     static CreateTwoDimensionArray(iLen) {
         let __aDefaultArray = new Array(iLen);
+        // 注意：下面的代码不能使用 __aDefaultArray.fill([]) 或者 __aDefaultArray.fill(new Array()) 替代，否则所有二维数组都指向同一个数组。
         for (let i = 0; i < iLen; i++) {
             __aDefaultArray[i] = [];
         }
@@ -54,10 +53,10 @@ class Utils {
      *            目标数组
      * @param iN
      *            分组因子
-     * @return Array一个长度为20的二维数组
+     * @return Array 一个长度为20的二维数组
      */
     static ElementGroupByN(aObj, iN) {
-        let __aZeroArray = Utils.CreateTwoDimensionArray(20, []);
+        let __aZeroArray = Utils.CreateTwoDimensionArray(20);
         for (let ele of aObj) {
             let __quotient = Math.floor((ele - 1) / iN);// 取商(被10除,商相同的元素为一组)
             let __remainder = (ele - 1) % iN;// 取余
@@ -74,8 +73,6 @@ class Utils {
      * @return Number 0-iN的随机整数
      */
     static RandomNumFromZeroToN(iN) {
-        let iR = Math.random() * iN;
-        return Math.round(iR);// 舍尾取数
+        return Math.round(Math.random() * iN);// 舍尾取数
     }
 }
-
