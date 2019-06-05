@@ -25,9 +25,9 @@ class Canvas {
             oDiv_canvas = Utils.CreateElement('div', this.offset, null);
             document.body.appendChild(oDiv_canvas);
         }
-        let oFragment = document.createDocumentFragment();// 创建文档碎片
+        const oFragment = document.createDocumentFragment();// 创建文档碎片
         for (let i = 1; i <= this.row * this.column; i++) {
-            let oSpan = Utils.CreateElement('span', i, null);
+            const oSpan = Utils.CreateElement('span', i, null);
             oFragment.appendChild(oSpan);
         }
         oDiv_canvas.appendChild(oFragment);
@@ -58,7 +58,7 @@ class PreCanvas {
             oDiv_preCanvas = Utils.CreateElement('div', this.offset, null);
             document.body.appendChild(oDiv_preCanvas);
         }
-        let oFragment = document.createDocumentFragment();// 创建文档碎片
+        const oFragment = document.createDocumentFragment();// 创建文档碎片
         for (let i = -(this.row * this.column) + 11; i < 11; i++) {
             let oSpan = Utils.CreateElement('span', `pre_${i}`, null);
             oFragment.appendChild(oSpan);
@@ -68,15 +68,15 @@ class PreCanvas {
 
     show(oArray) {
         for (let i = -(this.row * this.column) + 11; i < 11; i++) {
-            let __oE = document.getElementById(`pre_${i}`);
-            if (__oE) {
-                __oE.style.background = document.getElementById(this.offset).style.background;
+            const oE = document.getElementById(`pre_${i}`);
+            if (oE) {
+                oE.style.background = document.getElementById(this.offset).style.background;
             }
         }
         for (let i of oArray) {
-            let __oE = document.getElementById(`pre_${i}`);
-            if (__oE) {
-                __oE.style.background = 'gray';
+            const oE = document.getElementById(`pre_${i}`);
+            if (oE) {
+                oE.style.background = 'gray';
             }
         }
     }

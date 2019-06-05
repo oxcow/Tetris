@@ -26,9 +26,10 @@ class Tetris {
      */
     draw() {
         this.body.forEach(ele => {
-            let _oE = document.getElementById(ele);
-            if (_oE)
-                _oE.style.background = "#135";
+            const oE = document.getElementById(ele);
+            if (oE) {
+                oE.style.background = "#135";
+            }
         });
     }
 
@@ -37,9 +38,9 @@ class Tetris {
      */
     eraser() {
         this.body.forEach(ele => {
-            let _oE = document.getElementById(ele);
-            if (_oE) {
-                _oE.style.background = document.getElementById("canvas").style.background;
+            let oE = document.getElementById(ele);
+            if (oE) {
+                oE.style.background = document.getElementById("canvas").style.background;
             }
         });
     }
@@ -74,9 +75,7 @@ class Tetris {
      */
     move(iOffset) {
         this.eraser();
-        for (let i = 0; i < this.body.length; i++) {
-            this.body[i] += iOffset;
-        }
+        this.body = this.body.map(x => x + iOffset);
         this.axis += iOffset;
         this.draw();
     }
@@ -86,44 +85,44 @@ class Tetris {
      *
      * @return Tetris 返回Tetris实例
      */
-    static NewInstance(){
+    static NewInstance() {
         // 旋转轴, 角度, 类型
-        let [__iAxis, __iAngle, __iType] = [-15, Utils.RandomNumFromZeroToN(4) * 90, Utils.RandomNumFromZeroToN(9)];
+        const [iAxis, iAngle, iType] = [-15, Utils.RandomNumFromZeroToN(4) * 90, Utils.RandomNumFromZeroToN(9)];
 
-        let __oTetris = new T_Tetris(__iAxis, __iAngle);
+        let oTetris = new T_Tetris(iAxis, iAngle);
 
-        switch (__iType) {
+        switch (iType) {
             case 0:
             case 8:
-                __oTetris = new I_Tetris(__iAxis, __iAngle);
+                oTetris = new I_Tetris(iAxis, iAngle);
                 break;
             case 1:
-                __oTetris = new O_Tetris(__iAxis);
+                oTetris = new O_Tetris(iAxis);
                 break;
             case 2:
             case 7:
-                __oTetris = new S_Tetris(__iAxis, __iAngle);
+                oTetris = new S_Tetris(iAxis, iAngle);
                 break;
             case 3:
-                __oTetris = new L_Tetris(__iAxis, __iAngle);
+                oTetris = new L_Tetris(iAxis, iAngle);
                 break;
             case 4:
-                __oTetris = new Z_Tetris(__iAxis, __iAngle);
+                oTetris = new Z_Tetris(iAxis, iAngle);
                 break;
             case 5:
-                __oTetris = new T_Tetris(__iAxis, __iAngle);
+                oTetris = new T_Tetris(iAxis, iAngle);
                 break;
             case 6:
-                __oTetris = new J_Tetris(__iAxis, __iAngle);
+                oTetris = new J_Tetris(iAxis, iAngle);
                 break;
         }
-        return __oTetris;
+        return oTetris;
     }
 
 }
 
 Tetris.COLUMN = 10;// 列数
- 
+
 /**
  * O-型方块类.O-型方块旋转没有变化,因此无需调用基类rotate方法
  *
@@ -169,21 +168,21 @@ class I_Tetris extends Tetris {
      *            角度
      * @return
      */
-    static InitBody(iAxis, iAngle){
-        let __iBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + 2];
+    static InitBody(iAxis, iAngle) {
+        let iBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + 2];
         switch (iAngle) {
             case 0:
             case 180:
             case 360:
                 iAxis = (iAxis % 10 === 0) ? iAxis -= 2 : (iAxis % 10 === 9) ? iAxis -= 1 : iAxis;
-                __iBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + 2];
+                iBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + 2];
                 break;
             case 90:
             case 270:
-                __iBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + 2 * Tetris.COLUMN];
+                iBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + 2 * Tetris.COLUMN];
                 break;
         }
-        return __iBody;
+        return iBody;
     }
 }
 
@@ -206,6 +205,7 @@ class L_Tetris extends Tetris {
         this.iAngle = (this.iAngle === 360) ? 90 : this.iAngle + 90;
         this.rotateTune(L_Tetris.InitBody(this.axis, this.iAngle));
     }
+
     /**
      * 创建新的L-型方块
      *
@@ -214,24 +214,24 @@ class L_Tetris extends Tetris {
      * @param iAngle
      *            角度
      */
-    static InitBody(iAxis, iAngle){
-        let __lBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
+    static InitBody(iAxis, iAngle) {
+        let lBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
         switch (iAngle) {
             case 0:
             case 360:
-                __lBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
+                lBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
                 break;
             case 90:
-                __lBody = [iAxis + 1, iAxis, iAxis - 1, iAxis + Tetris.COLUMN - 1];
+                lBody = [iAxis + 1, iAxis, iAxis - 1, iAxis + Tetris.COLUMN - 1];
                 break;
             case 180:
-                __lBody = [iAxis + Tetris.COLUMN, iAxis, iAxis - Tetris.COLUMN, iAxis - Tetris.COLUMN - 1];
+                lBody = [iAxis + Tetris.COLUMN, iAxis, iAxis - Tetris.COLUMN, iAxis - Tetris.COLUMN - 1];
                 break;
             case 270:
-                __lBody = [iAxis - 1, iAxis, iAxis + 1, iAxis - Tetris.COLUMN + 1];
+                lBody = [iAxis - 1, iAxis, iAxis + 1, iAxis - Tetris.COLUMN + 1];
                 break;
         }
-        return __lBody;
+        return lBody;
     }
 }
 
@@ -254,6 +254,7 @@ class J_Tetris extends Tetris {
         this.iAngle = (this.iAngle === 360) ? 90 : this.iAngle + 90;
         this.rotateTune(J_Tetris.InitBody(this.axis, this.iAngle));
     }
+
     /**
      * 创建新的J-型方块
      *
@@ -264,23 +265,23 @@ class J_Tetris extends Tetris {
      * @return
      */
     static InitBody(iAxis, iAngle) {
-        let __jBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN - 1];
+        let jBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN - 1];
         switch (iAngle) {
             case 0:
             case 360:
-                __jBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN - 1];
+                jBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN - 1];
                 break;
             case 90:
-                __jBody = [iAxis + 1, iAxis, iAxis - 1, iAxis - Tetris.COLUMN - 1];
+                jBody = [iAxis + 1, iAxis, iAxis - 1, iAxis - Tetris.COLUMN - 1];
                 break;
             case 180:
-                __jBody = [iAxis + Tetris.COLUMN, iAxis, iAxis - Tetris.COLUMN, iAxis - Tetris.COLUMN + 1];
+                jBody = [iAxis + Tetris.COLUMN, iAxis, iAxis - Tetris.COLUMN, iAxis - Tetris.COLUMN + 1];
                 break;
             case 270:
-                __jBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + Tetris.COLUMN + 1];
+                jBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + Tetris.COLUMN + 1];
                 break;
         }
-        return __jBody;
+        return jBody;
     }
 }
 
@@ -303,6 +304,7 @@ class T_Tetris extends Tetris {
         this.iAngle = (this.iAngle === 360) ? 90 : this.iAngle + 90;
         this.rotateTune(T_Tetris.InitBody(this.axis, this.iAngle));
     }
+
     /**
      * 创建新的T-型方块
      *
@@ -313,23 +315,23 @@ class T_Tetris extends Tetris {
      * @return
      */
     static InitBody(iAxis, iAngle) {
-        let __tBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + Tetris.COLUMN];
+        let tBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + Tetris.COLUMN];
         switch (iAngle) {
             case 0:
             case 360:
-                __tBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + Tetris.COLUMN];
+                tBody = [iAxis - 1, iAxis, iAxis + 1, iAxis + Tetris.COLUMN];
                 break;
             case 90:
-                __tBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis - 1];
+                tBody = [iAxis - Tetris.COLUMN, iAxis, iAxis + Tetris.COLUMN, iAxis - 1];
                 break;
             case 180:
-                __tBody = [iAxis + 1, iAxis, iAxis - 1, iAxis - Tetris.COLUMN];
+                tBody = [iAxis + 1, iAxis, iAxis - 1, iAxis - Tetris.COLUMN];
                 break;
             case 270:
-                __tBody = [iAxis + Tetris.COLUMN, iAxis, iAxis - Tetris.COLUMN, iAxis + 1];
+                tBody = [iAxis + Tetris.COLUMN, iAxis, iAxis - Tetris.COLUMN, iAxis + 1];
                 break;
         }
-        return __tBody;
+        return tBody;
     }
 }
 
@@ -352,6 +354,7 @@ class S_Tetris extends Tetris {
         this.iAngle = (this.iAngle === 360) ? 90 : this.iAngle + 90;
         this.rotateTune(S_Tetris.InitBody(this.axis, this.iAngle));
     }
+
     /**
      * 创建新的S-型方块.S-型方块旋转只有两种变化.180或360度的都可看作为0度的
      *
@@ -361,7 +364,7 @@ class S_Tetris extends Tetris {
      *            角度
      * @return
      */
-    static InitBody (iAxis, iAngle) {
+    static InitBody(iAxis, iAngle) {
         let __sBody = [iAxis + 1, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN - 1];
         switch (iAngle) {
             case 0:
@@ -397,6 +400,7 @@ class Z_Tetris extends Tetris {
         this.iAngle = (this.iAngle === 360) ? 90 : this.iAngle + 90;
         this.rotateTune(Z_Tetris.InitBody(this.axis, this.iAngle));
     }
+
     /**
      * 创建新的Z-型方块.Z-型方块旋转只有两种变化.180或360度的都可看作为0度的
      *
@@ -406,19 +410,19 @@ class Z_Tetris extends Tetris {
      *            角度
      * @return
      */
-    static InitBody (iAxis, iAngle) {
-        let __zBody = [iAxis - 1, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
+    static InitBody(iAxis, iAngle) {
+        let zBody = [iAxis - 1, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
         switch (iAngle) {
             case 0:
             case 180:
             case 360:
-                __zBody = [iAxis - 1, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
+                zBody = [iAxis - 1, iAxis, iAxis + Tetris.COLUMN, iAxis + Tetris.COLUMN + 1];
                 break;
             case 90:
             case 270:
-                __zBody = [iAxis - Tetris.COLUMN, iAxis, iAxis - 1, iAxis + Tetris.COLUMN - 1];
+                zBody = [iAxis - Tetris.COLUMN, iAxis, iAxis - 1, iAxis + Tetris.COLUMN - 1];
                 break;
         }
-        return __zBody;
+        return zBody;
     }
 }
