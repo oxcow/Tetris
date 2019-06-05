@@ -76,7 +76,7 @@ class PreCanvas {
         for (let i of oArray) {
             let __oE = document.getElementById(`pre_${i}`);
             if (__oE) {
-                __oE.style.background = 'blue';
+                __oE.style.background = 'gray';
             }
         }
     }

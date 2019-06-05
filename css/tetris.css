@@ -1,71 +1,79 @@
 @CHARSET "UTF-8";
 
 body {
-	margin-left: 60px;
-	margin-top: 20px;
+    margin-left: 60px;
+    margin-top: 20px;
 }
 
 #TetrisGame {
-	width: 434px;
-	height: 442px;
-	border: 1px solid red;
+    width: 434px;
+    height: 442px;
+    border: 0px solid red;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 #canvas {
-	float: left;
-	width: 230px;
-	height: 440px;
-	border: 1px solid green;
+    width: 220px;
+    height: 440px;
+    border: 0px solid green;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 #canvas span {
-	float: left;
-	padding-left: 1px;
-	width: 20px;
-	height: 20px;
-	border: 1px solid #eee;
-	font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #eee;
+    font-size: 12px;
+}
+
+#controlPanel {
+    width: 212px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 #preCanvas {
-	float: left;
-	padding-top: 15px;
-	width: 200px;
-	height: 80px;
-	border-bottom: 1px;
+    width: 200px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #preCanvas span {
-	float: left;
-	width: 20px;
-	height: 20px;
-	font-size: 12px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
 }
 
 #control {
-	float: left;
-	padding-top: 15px;
-	width: 200px;
-	height: 321px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #control label {
-	padding-left: 20px;
-	border: 0px solid #A2C11E;
-	font-family: cursive;
-}
-
-#score #level {
-	background: red;
+    width: 150px;
+    font-family: cursive;
 }
 
 #control button {
-	margin: 15px 0px 13px 10px;
-	width: 80px;
+    width: 150px;
+    margin: 15px 0px 13px 0px;
+}
+
+#score, #level {
+    color: red;
 }
 
 #debug {
-	float: left;
-	width: 433px;
-	font-size: 11px;
+    display: none;
+    width: 434px;
+    height: 200px;
+    font-size: 11px;
+    border-width: 0;
 }
